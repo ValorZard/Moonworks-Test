@@ -23,6 +23,9 @@ class Game1 : Game
 
 	const int MAX_SPRITE_COUNT = 8192;
 
+	private int PlayerX = 300;
+	private int PlayerY = 300;
+
 	Random Random = new Random();
 
 	[StructLayout(LayoutKind.Explicit, Size = 48)]
@@ -176,7 +179,7 @@ class Game1 : Game
 			var data = SpriteComputeTransferBuffer.Map<ComputeSpriteData>(true);
 			for (var i = 0; i < MAX_SPRITE_COUNT; i += 1)
 			{
-				data[i].Position = new Vector3(Random.Next(640), Random.Next(480), 0);
+				data[i].Position = new Vector3(PlayerX, PlayerY, 0);
 				data[i].Rotation = (float) (Random.NextDouble() * System.Math.PI * 2);
 				data[i].Size = new Vector2(32, 32);
 				data[i].Color = new Vector4(1f, 1f, 1f, 1f);
@@ -232,6 +235,21 @@ class Game1 : Game
 
     protected override void Update(TimeSpan delta)
     {
-		
+	    if (Inputs.Keyboard.IsDown(KeyCode.W))
+	    {
+		    PlayerY--;
+	    }
+	    if (Inputs.Keyboard.IsDown(KeyCode.S))
+	    {
+		    PlayerY++;
+	    }
+	    if (Inputs.Keyboard.IsDown(KeyCode.A))
+	    {
+		    PlayerX--;
+	    }
+	    if (Inputs.Keyboard.IsDown(KeyCode.D))
+	    {
+		    PlayerX++;
+	    }
     }
 }
